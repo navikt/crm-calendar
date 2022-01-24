@@ -1,5 +1,5 @@
 public with sharing class myFirstApexClass {
-    public myFirstApexClass() {
+    public static myFirstApexClass1() {
 
     }
 }
