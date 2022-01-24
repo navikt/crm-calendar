@@ -1,0 +1,9 @@
+ #!/bin/bash
+
+# Oppretter scratch org
+sfdx force:org:create -f config/project-scratch-def.json --setalias $1 --durationdays $2 --setdefaultusername --json --loglevel fatal  --wait 10
+
+# Dytt kildekoden til scratch org'en
+sfdx force:source:push
+
+# done
