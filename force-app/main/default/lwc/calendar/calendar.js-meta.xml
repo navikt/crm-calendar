@@ -11,8 +11,6 @@
     <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
             <objects>
-                <object>HOT_Request__c</object>
-                <object>ServiceAppointment</object>
                 <object>WorkOrder</object>
             </objects>
         </targetConfig>
