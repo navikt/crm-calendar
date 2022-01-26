@@ -4,4 +4,7 @@ call sfdx force:org:create -f config\project-scratch-def.json --setalias %1 --du
 echo "Dytter kildekoden til scratch org'en"
 call sfdx force:source:push
 
+echo "Tildeler tilatelsessett til brukeren"
+call sfdx force:user:permset:assign --permsetname CustomCalendar
+
 echo "Ferdig"
