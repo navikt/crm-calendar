@@ -6,4 +6,8 @@
     </applicationVisibilities>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Custom Calendar</label>
+    <tabSettings>
+        <tab>Calendar</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
 </PermissionSet>
