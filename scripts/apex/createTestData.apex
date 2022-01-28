@@ -1,33 +1,41 @@
 Account acc1 = new Account();
-acc1.name = 'Ola Nordmann';
+acc1.name = 'Jedi Order'';
 insert acc1;
 
 Account acc2 = new Account();
-acc2.name = 'Kari Nordmann';
+acc2.name = 'The Empire';
 insert acc2;
 
 Account acc3 = new Account();
-acc3.name = 'Nordmann Nordmann';
+acc3.name = 'The Trade Federation';
 insert acc3;
 
 Account acc4 = new Account();
-acc4.name = 'Mannord Nordmann';
+acc4.name = 'The Rebels';
 insert acc4;
 
 WorkOrder wo1 = new WorkOrder();
 wo1.subject ='Arbeidsordre 1';
+wo1.StartDate = Datetime.now();
+wo1.EndDate= Datetime.now().addHours(1);
 insert wo1;
 
 WorkOrder wo2 = new WorkOrder();
 wo2.subject ='Arbeidsordre 2';
+wo2.StartDate = Datetime.now().addDays(1);
+wo2.EndDate= Datetime.now().addDays(1).addHours(2);
 insert wo2;
 
 WorkOrder wo3 = new WorkOrder();
 wo3.subject ='Arbeidsordre 3';
+wo3.StartDate = Datetime.now().addDays(3);
+wo3.EndDate= Datetime.now().addDays(3).addHours(4);
 insert wo3;
 
 WorkOrder wo4 = new WorkOrder();
 wo4.subject ='Arbeidsordre 4';
+wo4.StartDate = Datetime.now().addHours(5);
+wo4.EndDate= Datetime.now().addHours(8);
 insert wo4;
 
 ServiceAppointment sa1 = new ServiceAppointment();
