@@ -1,36 +1,55 @@
-Person__c person = HOT_TestDataFactory.createPerson();
-person.Name = '12015678999';
-insert person;
-Person__c person2 = HOT_TestDataFactory.createPerson();
-person2.Name = '12015677455';
-insert person2;
-Account personAccount = HOT_TestDataFactory.createAccount(true);
-personAccount.INT_PersonIdent__c = '12015678999';
-personAccount.CRM_Person__c = person.Id;
-insert personAccount;
-Account personAccount2 = HOT_TestDataFactory.createAccount(true);
-personAccount2.INT_PersonIdent__c = '12015677455';
-personAccount2.CRM_Person__c = person2.Id;
-insert personAccount2;
-Account businessAccount = HOT_TestDataFactory.createAccount(false);
-businessAccount.INT_OrganizationNumber__c = '987654321';
-insert businessAccount;
-Account businessAccount2 = HOT_TestDataFactory.createAccount(false);
-businessAccount2.INT_OrganizationNumber__c = '667654321';
-insert businessAccount2;
+Account acc1 = new Account();
+acc1.name = 'Ola Nordmann';
+insert acc1;
 
-WorkType workType = HOT_TestDataFactory.createWorkType();
-insert workType;
+Account acc2 = new Account();
+acc2.name = 'Kari Nordmann';
+insert acc2;
 
-HOT_Request__c request = HOT_TestDataFactory.createRequest('Forespørsel 2', workType);
-insert request;
+Account acc3 = new Account();
+acc3.name = 'Nordmann Nordmann';
+insert acc3;
 
-HOT_Request__c request = HOT_TestDataFactory.createRequest('Testforespørsel', workType);
-insert request;
-request.Status__c = 'Godkjent';
-update request;
+Account acc4 = new Account();
+acc4.name = 'Mannord Nordmann';
+insert acc4;
 
-HOT_Request__c request = HOT_TestDataFactory.createRequest('Forespørsel 2', workType);
-insert request;
-request.Status__c = 'Godkjent';
-update request;
+WorkOrder wo1 = new WorkOrder();
+wo1.subject ='Arbeidsordre 1';
+insert wo1;
+
+WorkOrder wo2 = new WorkOrder();
+wo2.subject ='Arbeidsordre 2';
+insert wo2;
+
+WorkOrder wo3 = new WorkOrder();
+wo3.subject ='Arbeidsordre 3';
+insert wo3;
+
+WorkOrder wo4 = new WorkOrder();
+wo4.subject ='Arbeidsordre 4';
+insert wo4;
+
+ServiceAppointment sa1 = new ServiceAppointment();
+sa1.ParentRecordId = wo1.Id;
+sa1.EarliestStartTime = Datetime.now();
+sa1.DueDate = Datetime.now().addHours(1);
+insert sa1;
+
+ServiceAppointment sa2 = new ServiceAppointment();
+sa2.ParentRecordId = wo2.Id;
+sa2.EarliestStartTime = Datetime.now().addDays(1);
+sa2.DueDate = Datetime.now().addDays(1).addHours(2);
+insert sa2;
+
+ServiceAppointment sa3 = new ServiceAppointment();
+sa3.ParentRecordId = wo3.Id;
+sa3.EarliestStartTime = Datetime.now().addDays(3);
+sa3.DueDate = Datetime.now().addDays(3).addHours(4);
+insert sa3;
+
+ServiceAppointment sa4 = new ServiceAppointment();
+sa4.ParentRecordId = wo4.Id;
+sa4.EarliestStartTime = Datetime.now().addHours(5);
+sa4.DueDate = Datetime.now().addHours(8);
+insert sa4;
