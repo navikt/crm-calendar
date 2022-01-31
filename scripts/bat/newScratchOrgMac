@@ -9,4 +9,7 @@ sfdx force:source:push
 # Tildel tilatelsessett til brukeren
 sfdx force:user:permset:assign --permsetname CustomCalendar
 
+# Opprett testdata
+sfdx force:apex:execute -f scripts/apex/createTestData.apex
+
 # done
