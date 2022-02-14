@@ -1,5 +1,5 @@
 {
-  "defaultusername": "myOrg",
+  "defaultusername": "",
   "restDeploy": "false",
-  "defaultdevhubusername": "magnus.christian.moller.jensen@nav.no.dx"
+  "defaultdevhubusername": "prod"
 }
