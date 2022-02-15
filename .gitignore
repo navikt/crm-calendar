@@ -186,3 +186,4 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 .sfdx
+.sfdx/sfdx-config.json
