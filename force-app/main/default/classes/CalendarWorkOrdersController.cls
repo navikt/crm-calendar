@@ -1,7 +1,7 @@
-public with sharing class CalendarWorkOrdersController {
+public without sharing class CalendarWorkOrdersController {
     @AuraEnabled(cacheable=true)
-    public static WorkOrder getWorkOrder() {
-        WorkOrder myWorkOrders = [SELECT subject, StartDate, EndDate FROM WorkOrder];
-        return myWorkOrders;
+    public static List<WorkOrder> getAllWorkOrders() {
+        List<WorkOrder> allWorkOrders = [SELECT FIELDS(STANDARD) FROM WorkOrder];
+        return allWorkOrders;
     }
 }

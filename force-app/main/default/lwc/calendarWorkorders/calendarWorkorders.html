@@ -1,8 +1,9 @@
 <template>
-    <div>{test}</div>
-
-    <!--  <lightning-record-view-form object-api-name="workOrder" mode="view">
-        <lightning-output-field field-name="subject" label="Navn"></lightning-output-field>
-        <lightning-output-field field-name="StartDate" label="startdato"> </lightning-output-field>
-    </lightning-record-view-form> -->
+    <lightning-card title="WorkOrdersWohooo" icon-name="custom:custom14">
+        <ul class="slds-m-around_medium">
+            <template for:each={workOrders} for:item="workOrder">
+                <li key={workOrder.Id}>{workOrder.Subject}, {workOrder.StartDate}, {workOrder.EndDate}</li>
+            </template>
+        </ul>
+    </lightning-card>
 </template>
