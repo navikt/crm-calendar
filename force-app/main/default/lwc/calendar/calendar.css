@@ -1,0 +1,10 @@
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    background-color: antiquewhite;
+}
+
+.slds-col {
+    border-right: 1px solid black;
+    text-align: center;
+}
