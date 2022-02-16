@@ -1,29 +1,20 @@
 <template>
+    <!-- Neutral variant (default) -->
+    <main class="main-container">
+        <h1 class="month-title">{currentMonth}</h1>
+        <lightning-button
+            label="<"
+            title="Non-primary action"
+            onclick={handlePrev}
+            class="slds-m-left_x-small"
+        ></lightning-button>
         <!-- Neutral variant (default) -->
-        <lightning-button label="<" title="Non-primary action" onclick={handlePrev} class="slds-m-left_x-small"></lightning-button>
-        <!-- Neutral variant (default) -->
-        <lightning-button label=">" title="Non-primary action" onclick={handleNext} class="slds-m-left_x-small"></lightning-button>
-<div class="slds-grid slds-wrap calendar-container">
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Man </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Tir </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Ons </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Tor </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Fre </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Lør </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Søn </span>
-        </div>
-    </div> 
+        <lightning-button
+            label=">"
+            title="Non-primary action"
+            onclick={handleNext}
+            class="slds-m-left_x-small"
+        ></lightning-button>
+        <div class="slds-grid slds-wrap calendar-container"></div>
+    </main>
 </template>

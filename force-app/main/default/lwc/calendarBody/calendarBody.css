@@ -2,7 +2,17 @@
     background-color: #fff;
 }
 
+.main-container {
+    background-color: white;
+}
+
 .day-header {
     border-bottom: 0.5px solid rgb(154, 154, 154);
     text-align: center;
+}
+
+.month-title {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: large;
 }
