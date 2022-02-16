@@ -1,5 +1,9 @@
 <template>
-    <div class="slds-grid slds-wrap calendar-container">
+        <!-- Neutral variant (default) -->
+        <lightning-button label="<" title="Non-primary action" onclick={handlePrev} class="slds-m-left_x-small"></lightning-button>
+        <!-- Neutral variant (default) -->
+        <lightning-button label=">" title="Non-primary action" onclick={handleNext} class="slds-m-left_x-small"></lightning-button>
+<div class="slds-grid slds-wrap calendar-container">
         <div class="slds-col slds-size_1-of-7 day-header">
             <span> Man </span>
         </div>
@@ -21,5 +25,5 @@
         <div class="slds-col slds-size_1-of-7 day-header">
             <span> Søn </span>
         </div>
-    </div>
+    </div> 
 </template>

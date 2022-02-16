@@ -1,11 +1,21 @@
 import { LightningElement } from 'lwc';
 
 export default class CalendarBody extends LightningElement {
+
+
     weekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
     calendarContainer = document.getElementsByClassName('calendar-container');
 
+    nav = 0;
+
+    handlePrev() {
+        this.nav--;
+        this.load(this.template.querySelector('div'));
+    }
+
     renderedCallback() {
         this.load(this.template.querySelector('div'));
+
     }
 
     load(element) {
@@ -16,6 +26,10 @@ export default class CalendarBody extends LightningElement {
 
         const firstDayOfMonth = new Date(year, month, 1);
         const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        if (this.nav !== 0) {
+            dt.setMonth(new Date().getMonth() + this.nav);
+        }
 
         const dateString = firstDayOfMonth.toLocaleDateString('no', {
             weekday: 'long',
