@@ -1,11 +1,10 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement } from 'lwc';
 
 export default class CalendarBody extends LightningElement {
     weekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
-    calendarContainer = document.getElementsByClassName('calendar-container');
     monthNav = 0;
-    currentMonth = 'Test';
-
+    currentMonth;
+    
     handlePrev() {
         this.monthNav--;
         this.load(this.template.querySelector('div'));
@@ -29,7 +28,6 @@ export default class CalendarBody extends LightningElement {
         const day = dt.getDate();
         const month = dt.getMonth();
         const year = dt.getFullYear();
-
         const firstDayOfMonth = new Date(year, month, 1);
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
