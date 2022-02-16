@@ -7,11 +7,7 @@ public without sharing class CalendarWorkOrdersController {
 
     @AuraEnabled(cacheable=true)
     public static List<Account> getAllAccounts() {
-        try {
-            List<Account> allAccounts = [SELECT FIELDS(STANDARD) FROM ACCOUNT];
-            return allAccounts;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
+        List<Account> allAccounts = [SELECT FIELDS(STANDARD) FROM ACCOUNT];
+        return allAccounts;
     }
 }
