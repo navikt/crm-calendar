@@ -2,8 +2,16 @@
     <lightning-card title="WorkOrdersWohooo" icon-name="custom:custom14">
         <ul class="slds-m-around_medium">
             <template for:each={workOrders} for:item="workOrder">
-                <li key={workOrder.Id}>{workOrder.Subject}, {workOrder.StartDate}, {workOrder.EndDate}</li>
+                <li key={workOrder.Id}>
+                    {workOrder.Subject}, {workOrder.StartDate}, {workOrder.EndDate} -- {workOrder.Id}
+                </li>
             </template>
         </ul>
+    </lightning-card>
+
+    <lightning-card title="Accounts" icon-name="custom:custom7">
+        <template for:each={allAccounts} for:item="account">
+            <li key={account.Id}>{account.Name} -- {account.Id} -- {account.relatedId}</li>
+        </template>
     </lightning-card>
 </template>

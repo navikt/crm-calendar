@@ -4,4 +4,14 @@ public without sharing class CalendarWorkOrdersController {
         List<WorkOrder> allWorkOrders = [SELECT FIELDS(STANDARD) FROM WorkOrder];
         return allWorkOrders;
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Account> getAllAccounts() {
+        try {
+            List<Account> allAccounts = [SELECT FIELDS(STANDARD) FROM ACCOUNT];
+            return allAccounts;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
