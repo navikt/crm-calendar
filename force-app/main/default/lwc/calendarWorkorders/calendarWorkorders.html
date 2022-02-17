@@ -10,8 +10,10 @@
     </lightning-card>
 
     <lightning-card title="Accounts" icon-name="custom:custom7">
-        <template for:each={allAccounts} for:item="account">
-            <li key={account.Id}>{account.Name} -- {account.Id} -- {account.relatedId}</li>
-        </template>
+        <ul class="slds-m-around_medium">
+            <template for:each={allAccounts} for:item="account">
+                <li key={account.Id}>{account.Name} -- {account.Id} -- {account.relatedId}</li>
+            </template>
+        </ul>
     </lightning-card>
 </template>
