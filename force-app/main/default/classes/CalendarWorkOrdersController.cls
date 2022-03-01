@@ -7,9 +7,17 @@ public without sharing class CalendarWorkOrdersController {
         return allWorkOrders;
     }
 
+    //Accounts
     @AuraEnabled(cacheable=true)
     public static List<Account> getAllAccounts() {
         List<Account> allAccounts = [SELECT FIELDS(STANDARD) FROM ACCOUNT];
         return allAccounts;
+    }
+
+    //ServiceAppointments
+    @AuraEnabled(cacheable=true)
+    public static List<ServiceAppointment> getAllServiceAppointments() {
+        List<ServiceAppointment> allServiceAppointments = [SELECT FIELDS(STANDARD) FROM ServiceAppointment];
+        return allServiceAppointments;
     }
 }
