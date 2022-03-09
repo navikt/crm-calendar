@@ -1,5 +1,5 @@
 Account acc1 = new Account();
-acc1.name = 'Jedi Order'';
+acc1.name = 'Jedi Order';
 insert acc1;
 
 Account acc2 = new Account();

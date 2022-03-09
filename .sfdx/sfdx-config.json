@@ -1,5 +1,7 @@
 {
   "defaultusername": "myOrg",
   "restDeploy": "false",
-  "defaultdevhubusername": "magnus.christian.moller.jensen@nav.no.dx"
+
+  "defaultdevhubusername": "vscodeOrg"
+
 }

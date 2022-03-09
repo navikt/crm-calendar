@@ -13,3 +13,6 @@ sfdx force:user:permset:assign --permsetname CustomCalendar
 sfdx force:apex:execute -f scripts/apex/createTestData.apex
 
 # done
+
+# For å slette scratchOrg:
+sfdx force:org:delete -u NavnetPåOrg
