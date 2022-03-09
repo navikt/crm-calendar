@@ -1,0 +1,18 @@
+<template>
+        <main class="slds-grid slds-grid_align-end main-container">
+            <lightning-button
+                label="<"
+                title="Non-primary action"
+                onclick={handlePrev}
+                class="slds-x-small nav-button"
+            ></lightning-button>
+            <h1 class="month-title">{currentMonth}</h1>
+            <lightning-button
+                label=">"
+                title="Non-primary action"
+                onclick={handleNext}
+                class="slds-x-small nav-button"
+            ></lightning-button>
+    </main>
+    <div class="slds-grid slds-wrap calendar-container"></div>
+</template>
