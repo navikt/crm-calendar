@@ -1,0 +1,37 @@
+.calendar-container {
+    background-color: #fff;
+}
+
+.main-container {
+    background-color: white;
+}
+
+.day-header {
+    border-bottom: 0.5px solid rgb(154, 154, 154);
+    text-align: center;
+}
+
+.month-title {
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 550;
+    font-size: 20px;
+    color: #244B6D;
+}
+
+.month-title-1 {
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: 550;
+    font-size: 20px;
+    color: #244B6D;
+}
+
+.nav-button {
+    float: right;
+}
+
+h1 {
+    display: inline;
+    width: 170px;
+}
