@@ -12,8 +12,10 @@ export default class CalendarBody extends LightningElement {
     @wire(getAllWorkOrders)
     wiredGetAllWorkOrders(result) {
         if (result.data) {
-            console.log('DATA: ', result.data);
+            console.log('DATA WORKS: ', result.data);
             this.workOrders = result.data;
+            //console.log('Show StartDate: ', this.workOrders[0].StartDate);
+            this.load(this.template.querySelector('div'));
         }
     }
 
@@ -32,6 +34,12 @@ export default class CalendarBody extends LightningElement {
 
     load(element) {
         const dt = new Date();
+
+        if (this.workOrders) {
+            this.workOrders.forEach((wo) => {
+                console.log('Show StartDate: ', wo.StartDate);
+            });
+        }
 
         if (this.monthNav !== 0) {
             dt.setMonth(new Date().getMonth() + this.monthNav);
