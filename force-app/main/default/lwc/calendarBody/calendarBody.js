@@ -55,6 +55,7 @@ export default class CalendarBody extends LightningElement {
             month: 'numeric',
             day: 'numeric'
         });
+        //  console.log(firstDateString);
 
         const lastDateString = lastDayOfMonth.toLocaleDateString('no', {
             weekday: 'long',
@@ -124,6 +125,7 @@ export default class CalendarBody extends LightningElement {
                 daySquare.innerText = prevPaddingDays[i - 1];
                 daySquare.style.opacity = '0.5';
             } else if (i > daysInMonth) {
+                // console.log(nextPaddingDays[i]);
                 daySquare.innerText = nextPaddingDays[i - 1];
             }
 
