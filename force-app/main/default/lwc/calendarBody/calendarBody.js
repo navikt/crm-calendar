@@ -7,6 +7,7 @@ export default class CalendarBody extends LightningElement {
     monthNav = 0;
     currentMonth = '';
     monthDays = [];
+    eventsForMonth = [];
 
     @track workOrders;
     @wire(getAllWorkOrders)
@@ -28,12 +29,8 @@ export default class CalendarBody extends LightningElement {
 
     load() {
         const dt = new Date();
+        this.eventsForMonth = [];
         this.monthDays = [];
-        if (this.workOrders) {
-            this.workOrders.forEach((wo) => {
-                console.log('Show StartDate: ', wo.StartDate);
-            });
-        }
 
         if (this.monthNav !== 0) {
             dt.setMonth(new Date().getMonth() + this.monthNav);
@@ -81,13 +78,31 @@ export default class CalendarBody extends LightningElement {
 
         this.currentMonth = `${dt.toLocaleDateString('no', { month: 'long' })} ${year}`;
 
+        if (this.workOrders) {
+            this.workOrders.forEach((wo) => {
+                //console.log('WorkOrder: ', new Date(wo.StartDate));
+                const workOrderDate = new Date(wo.StartDate);
+                if (workOrderDate.getMonth() == month) {
+                    this.eventsForMonth.push(wo);
+                }
+            });
+        }
+
         for (let i = 1; i <= paddingDaysFirst + daysInMonth; i++) {
+            let eventsForDay = [];
             const dateOfTheDay = new Date(year, month, i - paddingDaysFirst);
             if (i > paddingDaysFirst && i <= daysInMonth + paddingDaysFirst) {
+                this.eventsForMonth.forEach((event) => {
+                    if (dateOfTheDay.getDate() == new Date(event.StartDate).getDate()) {
+                        eventsForDay.push(event);
+                    }
+                });
                 this.monthDays.push({
                     day: i - paddingDaysFirst,
-                    date: dateOfTheDay
+                    date: dateOfTheDay,
+                    events: eventsForDay
                 });
+                console.log(this.monthDays);
             } else if (i <= paddingDaysFirst) {
                 this.monthDays.push({});
             }
