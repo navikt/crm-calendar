@@ -1,5 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
-import getAllWorkOrders from '@salesforce/apex/CalendarWorkOrdersController.getAllWorkOrders';
+import getObjects from '@salesforce/apex/CalendarWorkOrdersController.getObjects';
 
 export default class CalendarBody extends LightningElement {
     weekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
@@ -9,11 +9,11 @@ export default class CalendarBody extends LightningElement {
     monthDays = [];
     eventsForMonth = [];
 
-    @track workOrders;
-    @wire(getAllWorkOrders)
-    wiredGetAllWorkOrders(result) {
+    @track serviceAppointments;
+    @wire(getObjects, { record: 'ServiceAppointment', start: 'EarliestStartTime', endTime: 'DueDate' })
+    wiredGetAllServiceAppointments(result) {
         if (result.data) {
-            this.workOrders = result.data;
+            this.serviceAppointments = result.data;
             this.load();
         }
     }
@@ -50,7 +50,6 @@ export default class CalendarBody extends LightningElement {
             month: 'numeric',
             day: 'numeric'
         });
-        //  console.log(firstDateString);
 
         const lastDateString = lastDayOfMonth.toLocaleDateString('no', {
             weekday: 'long',
@@ -79,12 +78,11 @@ export default class CalendarBody extends LightningElement {
 
         this.currentMonth = `${dt.toLocaleDateString('no', { month: 'long' })} ${year}`;
 
-        if (this.workOrders) {
-            this.workOrders.forEach((wo) => {
-                //console.log('WorkOrder: ', new Date(wo.StartDate));
-                const workOrderDate = new Date(wo.StartDate);
-                if (workOrderDate.getMonth() == month) {
-                    this.eventsForMonth.push(wo);
+        if (this.serviceAppointments) {
+            this.serviceAppointments.forEach((sa) => {
+                const serviceAppointmentDate = new Date(sa.EarliestStartTime);
+                if (serviceAppointmentDate.getMonth() == month) {
+                    this.eventsForMonth.push(sa);
                 }
             });
         }
@@ -94,7 +92,7 @@ export default class CalendarBody extends LightningElement {
             const dateOfTheDay = new Date(year, month, i - paddingDaysFirst);
             if (i > paddingDaysFirst && i <= daysInMonth + paddingDaysFirst) {
                 this.eventsForMonth.forEach((event) => {
-                    if (dateOfTheDay.getDate() == new Date(event.StartDate).getDate()) {
+                    if (dateOfTheDay.getDate() == new Date(event.EarliestStartTime).getDate()) {
                         eventsForDay.push(event);
                     }
                 });
@@ -103,7 +101,6 @@ export default class CalendarBody extends LightningElement {
                     date: dateOfTheDay,
                     events: eventsForDay
                 });
-                console.log(this.monthDays);
             } else if (i <= paddingDaysFirst) {
                 this.monthDays.push({});
             }

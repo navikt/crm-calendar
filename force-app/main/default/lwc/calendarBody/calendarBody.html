@@ -40,7 +40,7 @@
             <div class="slds-col slds-size_1-of-7 day" key={monthDay.date}>
                 {monthDay.day}
                 <template for:each={monthDay.events} for:item="event">
-                    <div key={event.StartDate}>{event.Subject}</div>
+                    <div key={event.Id}>{event.Subject}</div>
                 </template>
             </div>
         </template>
