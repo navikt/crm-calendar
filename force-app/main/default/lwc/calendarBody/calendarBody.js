@@ -4,9 +4,9 @@ import getAllWorkOrders from '@salesforce/apex/CalendarWorkOrdersController.getA
 export default class CalendarBody extends LightningElement {
     weekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
     reversedWeekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'].reverse();
-    calendarContainer = document.getElementsByClassName('calendar-container');
     monthNav = 0;
-    currentMonth = 'Test';
+    currentMonth = '';
+    monthDays = [];
 
     @track workOrders;
     @wire(getAllWorkOrders)
@@ -15,22 +15,22 @@ export default class CalendarBody extends LightningElement {
             console.log('DATA WORKS: ', result.data);
             this.workOrders = result.data;
             //console.log('Show StartDate: ', this.workOrders[0].StartDate);
-            this.load(this.template.querySelector('div'));
+            this.load();
         }
     }
 
     handlePrev() {
         this.monthNav--;
-        this.load(this.template.querySelector('div'));
+        this.load();
     }
     handleNext() {
         this.monthNav++;
-        this.load(this.template.querySelector('div'));
+        this.load();
     }
 
-    load(element) {
+    load() {
         const dt = new Date();
-
+        this.monthDays = [];
         if (this.workOrders) {
             this.workOrders.forEach((wo) => {
                 console.log('Show StartDate: ', wo.StartDate);
@@ -83,51 +83,17 @@ export default class CalendarBody extends LightningElement {
 
         this.currentMonth = `${dt.toLocaleDateString('no', { month: 'long' })} ${year}`;
 
-        element.innerHTML = `
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Man </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Tir </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Ons </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Tor </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Fre </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Lør </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Søn </span>
-        </div>`;
-
-        for (let i = 1; i <= paddingDaysFirst + daysInMonth + paddingDaysLast; i++) {
-            const daySquare = document.createElement('div');
-            daySquare.classList.add('day');
-            daySquare.classList.add('slds-col');
-            daySquare.classList.add('slds-size_1-of-7');
-            daySquare.style.float = 'right';
-            daySquare.style.border = '0.5px solid rgb(154, 154, 154)';
-            daySquare.style.height = '150px';
-            daySquare.style.paddingLeft = '6px';
-            daySquare.style.paddingTop = '3px';
-            daySquare.style.fontWeight = '500';
-
-            if (i > paddingDaysFirst && i <= daysInMonth + 1) {
-                daySquare.innerText = i - paddingDaysFirst;
+        for (let i = 1; i <= paddingDaysFirst + daysInMonth; i++) {
+            const dateOfTheDay = new Date(year, month, i - paddingDaysFirst);
+            if (i > paddingDaysFirst && i <= daysInMonth + paddingDaysFirst) {
+                this.monthDays.push({
+                    day: i - paddingDaysFirst,
+                    date: dateOfTheDay
+                });
             } else if (i <= paddingDaysFirst) {
-                daySquare.innerText = prevPaddingDays[i - 1];
-                daySquare.style.opacity = '0.5';
+                this.monthDays.push({});
             } else if (i > daysInMonth) {
-                daySquare.innerText = nextPaddingDays[i - 1];
             }
-
-            element.appendChild(daySquare);
         }
     }
 }
