@@ -33,7 +33,7 @@ export default class CalendarBody extends LightningElement {
 
         const firstDayOfMonth = new Date(year, month, 1);
         const lastDayOfMonth = new Date(year, month + 1, 0);
-        console.log('Last day: ', lastDayOfMonth);
+
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
         const firstDateString = firstDayOfMonth.toLocaleDateString('no', {
@@ -42,7 +42,7 @@ export default class CalendarBody extends LightningElement {
             month: 'numeric',
             day: 'numeric'
         });
-        console.log(firstDateString);
+        //  console.log(firstDateString);
 
         const lastDateString = lastDayOfMonth.toLocaleDateString('no', {
             weekday: 'long',
@@ -53,8 +53,6 @@ export default class CalendarBody extends LightningElement {
 
         const paddingDaysFirst = this.weekdays.indexOf(firstDateString.split(' ')[0]);
         const paddingDaysLast = this.reversedWeekdays.indexOf(lastDateString.split(' ')[0]);
-        console.log('Padding: ', paddingDaysFirst);
-        console.log('Padding After: ', paddingDaysLast);
 
         let prevPaddingDays = [];
         for (let j = 1; j <= paddingDaysFirst; j++) {
@@ -115,7 +113,7 @@ export default class CalendarBody extends LightningElement {
                 daySquare.innerText = prevPaddingDays[i - 1];
                 daySquare.style.opacity = '0.5';
             } else if (i > daysInMonth) {
-                console.log(nextPaddingDays[i]);
+                // console.log(nextPaddingDays[i]);
                 daySquare.innerText = nextPaddingDays[i - 1];
             }
 

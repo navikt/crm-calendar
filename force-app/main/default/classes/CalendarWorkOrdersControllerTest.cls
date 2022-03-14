@@ -18,7 +18,7 @@ private class CalendarWorkOrdersControllerTest {
     @isTest
     static void workOrdersListNotEmpty() {
         //Henter data fra test-databasen og legger den i en WorkOrder-liste
-        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getAllWorkOrders();
+        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getObjects('WorkOrder');
 
         //Sjekker at listen har 1 entry.
         System.assertEquals(1, allWorkOrders.size());
@@ -28,19 +28,10 @@ private class CalendarWorkOrdersControllerTest {
     @isTest
     static void workOrderListSubjectMatches() {
         //Henter data fra test-databasen og legger den i en WorkOrder-liste
-        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getAllWorkOrders();
+        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getObjects('WorkOrder');
 
         //Sjekker at første entry sitt subject er 'Arbeidsordre 1'
         System.assertEquals('Arbeidsordre 1', allWorkOrders[0].subject);
         System.assertNotEquals('Arbekjdsårdre 1', allWorkOrders[0].subject);
-    }
-
-    @isTest
-    static void accountNameNotUndefined() {
-        //Henter data fra test-databasen og legger den i en Account-List
-        List<Account> allAccounts = CalendarWorkOrdersController.getAllAccounts();
-
-        //Sjekker at første entry sitt navn er 'Jedi Order'
-        System.assertEquals('Jedi Order', allAccounts[0].Name);
     }
 }
