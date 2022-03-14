@@ -28,10 +28,6 @@ export default class CalendarBody extends LightningElement {
         this.load(this.template.querySelector('div'));
     }
 
-    renderedCallback() {
-        this.load(this.template.querySelector('div'));
-    }
-
     load(element) {
         const dt = new Date();
 
@@ -110,7 +106,6 @@ export default class CalendarBody extends LightningElement {
             <span> Søn </span>
         </div>`;
 
-        const test = 1;
         for (let i = 1; i <= paddingDaysFirst + daysInMonth + paddingDaysLast; i++) {
             const daySquare = document.createElement('div');
             daySquare.classList.add('day');
