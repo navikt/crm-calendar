@@ -1,30 +1,13 @@
 import { LightningElement, track, wire } from 'lwc';
-import getAllWorkOrders from '@salesforce/apex/CalendarWorkOrdersController.getAllWorkOrders';
-import getAllAccounts from '@salesforce/apex/CalendarWorkOrdersController.getAllAccounts';
-import getAllServiceAppointments from '@salesforce/apex/CalendarWorkOrdersController.getAllServiceAppointments';
-
+import getObjects from '@salesforce/apex/CalendarWorkOrdersController.getObjects';
 export default class CalendarWorkorders extends LightningElement {
-    @track workOrders;
-    @wire(getAllWorkOrders)
-    wiredgetAllWorkOrders(result) {
+    @track objects;
+    @wire(getObjects, { param: 'WorkOrder' })
+    wiredgetObjects(result) {
+        console.log('result ' + JSON.stringify(result));
         if (result.data) {
-            this.workOrders = result.data;
-        }
-    }
-
-    @track allAccounts;
-    @wire(getAllAccounts)
-    wiredgetAllAccounts(result) {
-        if (result.data) {
-            this.allAccounts = result.data;
-        }
-    }
-
-    @track allServiceAppointments;
-    @wire(getAllServiceAppointments)
-    wiredgetAllServiceAppointments(result) {
-        if (result.data) {
-            this.allServiceAppointments = result.data;
+            console.log('workorders ' + result.data);
+            this.objects = result.data;
         }
     }
 }

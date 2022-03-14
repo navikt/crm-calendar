@@ -50,6 +50,7 @@ export default class CalendarBody extends LightningElement {
             month: 'numeric',
             day: 'numeric'
         });
+        //  console.log(firstDateString);
 
         const lastDateString = lastDayOfMonth.toLocaleDateString('no', {
             weekday: 'long',

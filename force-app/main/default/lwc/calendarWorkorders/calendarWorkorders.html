@@ -1,11 +1,8 @@
 <template>
-    <lightning-card title="ServiceAppointments" icon-name="custom:custom3">
+    <lightning-card title="objects" icon-name="custom:custom10">
         <ul class="slds-m-around_medium">
-            <template for:each={allServiceAppointments} for:item="serviceAppointment">
-                <li key={serviceAppointment.Id}>
-                    {serviceAppointment.Id} -- {serviceAppointment.Subject} -- {serviceAppointment.EarliestStartTime} --
-                    {serviceAppointment.DueDate}
-                </li>
+            <template for:each={objects} for:item="object">
+                <li key={object.Id}>{object.Subject}, startdato: {object.StartDate}, Sluttdato: {object.EndDate}</li>
             </template>
         </ul>
     </lightning-card>
