@@ -15,7 +15,7 @@ private class CalendarWorkOrdersControllerTest {
         insert acc1;
     }
 
-    @isTest
+    /*    @isTest
     static void workOrdersListNotEmpty() {
         //Henter data fra test-databasen og legger den i en WorkOrder-liste
         List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getAllWorkOrders();
@@ -42,5 +42,5 @@ private class CalendarWorkOrdersControllerTest {
 
         //Sjekker at første entry sitt navn er 'Jedi Order'
         System.assertEquals('Jedi Order', allAccounts[0].Name);
-    }
+    } */
 }
