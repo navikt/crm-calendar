@@ -3,10 +3,7 @@ import { getRecord } from 'lightning/uiRecordApi';
 import USER_ID from '@salesforce/user/Id';
 import NAME_FIELD from '@salesforce/schema/User.FirstName';
 
-
 export default class Calendar extends LightningElement {
-
-    helloWorld = 'Hello World';
     userName;
     userId;
     @wire(getRecord, {
@@ -19,7 +16,4 @@ export default class Calendar extends LightningElement {
             this.userId = data.id;
         }
     }
-
-
-
 }
