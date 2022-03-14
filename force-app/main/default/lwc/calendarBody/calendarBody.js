@@ -12,9 +12,7 @@ export default class CalendarBody extends LightningElement {
     @wire(getAllWorkOrders)
     wiredGetAllWorkOrders(result) {
         if (result.data) {
-            console.log('DATA WORKS: ', result.data);
             this.workOrders = result.data;
-            //console.log('Show StartDate: ', this.workOrders[0].StartDate);
             this.load();
         }
     }
@@ -92,7 +90,6 @@ export default class CalendarBody extends LightningElement {
                 });
             } else if (i <= paddingDaysFirst) {
                 this.monthDays.push({});
-            } else if (i > daysInMonth) {
             }
         }
     }
