@@ -13,12 +13,23 @@ private class CalendarWorkOrdersControllerTest {
         Account acc1 = new Account();
         acc1.Name = 'Jedi Order';
         insert acc1;
+
+        ServiceAppointment sa1 = new ServiceAppointment();
+        sa1.ParentRecordId = wo1.Id;
+        sa1.subject = 'Oppdrag 1';
+        sa1.EarliestStartTime = Datetime.now();
+        sa1.DueDate = Datetime.now().addHours(1);
+        insert sa1;
     }
 
     @isTest
     static void workOrdersListNotEmpty() {
         //Henter data fra test-databasen og legger den i en WorkOrder-liste
-        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getObjects('WorkOrder');
+        List<ServiceAppointment> allWorkOrders = CalendarWorkOrdersController.getObjects(
+            'ServiceAppointment',
+            'EarliestStartTime',
+            'DueDate'
+        );
 
         //Sjekker at listen har 1 entry.
         System.assertEquals(1, allWorkOrders.size());
@@ -28,7 +39,7 @@ private class CalendarWorkOrdersControllerTest {
     @isTest
     static void workOrderListSubjectMatches() {
         //Henter data fra test-databasen og legger den i en WorkOrder-liste
-        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getObjects('WorkOrder');
+        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getObjects('WorkOrder', 'StartDate', 'EndDate');
 
         //Sjekker at første entry sitt subject er 'Arbeidsordre 1'
         System.assertEquals('Arbeidsordre 1', allWorkOrders[0].subject);
