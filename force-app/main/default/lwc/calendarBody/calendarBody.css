@@ -1,9 +1,20 @@
-.calendar-container {
-    background-color: #fff;
+* {
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .main-container {
     background-color: white;
+    max-width: 75%;
+    max-height: 100%;
+    
+}
+
+.calendar-container {
+    background-color: #fff;
+    max-width: 75%;
+    height: 500px;
+    max-height: 100%;
+   
 }
 
 .day-header {
@@ -12,12 +23,17 @@
 }
 
 .day {
-    float: right;
+  /*  float: right; */
     border: 0.5px solid rgb(154, 154, 154);
-    height: 150px;
-    padding-left: 6px;
+    height: 96px;
     padding-top: 3px;
+    padding-right: 6px;
     font-weight: 500;
+    text-align: left;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
 }
 
 .month-title {
@@ -40,7 +56,64 @@
     float: right;
 }
 
+.events {
+    color: #254B6D;
+    border : 1px solid #254B6D;
+    padding: 1px;
+    padding-left: 5px;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
 h1 {
     display: inline;
     width: 170px;
+}
+
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+     .main-container {
+        max-width: 100%;
+    }
+    
+    .calendar-container {
+       max-width: 100%;
+    }
+    .day {
+        font-size: 15px;
+    }
+
+}
+
+@media only screen and (max-width: 600px){
+	/*Big smartphones [426px -> 600px]*/
+    .main-container {
+        max-width: 100%;
+    }
+    
+    .calendar-container {
+        max-width: 100%;
+    }
+    .day {
+        font-size: 10px;
+    }
+
+}
+
+@media only screen and (max-width: 425px){
+	/*Small smartphones [325px -> 425px]*/
+    .main-container {
+        max-width: 100%;
+        
+    }
+    .calendar-container {
+        max-width: 100%;
+       
+    }
+    .day {
+        font-size: 9px;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
 }
