@@ -9,17 +9,16 @@ export default class CalendarBody extends LightningElement {
     monthDays = [];
     eventsForMonth = [];
 
-    @track serviceAppointments;
-    //@wire(getObjects, { record: 'ServiceAppointment', start: 'EarliestStartTime', endTime: 'DueDate' })
+    @track records;
     @wire(getObjects, {
         subject: 'subject',
         startDate: 'EarliestStartTime',
         endDate: 'DueDate',
         record: 'ServiceAppointment'
     })
-    wiredGetAllServiceAppointments(result) {
+    wiredGetObjects(result) {
         if (result.data) {
-            this.serviceAppointments = result.data;
+            this.records = result.data;
             this.load();
         }
     }
@@ -84,11 +83,13 @@ export default class CalendarBody extends LightningElement {
 
         this.currentMonth = `${dt.toLocaleDateString('no', { month: 'long' })} ${year}`;
 
-        if (this.serviceAppointments) {
-            this.serviceAppointments.forEach((sa) => {
-                const serviceAppointmentDate = new Date(sa.EarliestStartTime);
+        if (this.records) {
+            this.records.forEach((r) => {
+                //ønskelig å endre fra earlieststarttime (som er serviceappointment-spesifikk, til en generell startDate som
+                //kan fungere for alle typer. 2 linjer bør endres.)
+                const serviceAppointmentDate = new Date(r.EarliestStartTime);
                 if (serviceAppointmentDate.getMonth() == month) {
-                    this.eventsForMonth.push(sa);
+                    this.eventsForMonth.push(r);
                 }
             });
         }

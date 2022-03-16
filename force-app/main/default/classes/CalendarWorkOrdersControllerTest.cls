@@ -29,7 +29,7 @@ private class CalendarWorkOrdersControllerTest {
             'subject',
             'EarliestStartTime',
             'DueDate',
-            'ServiceAppontment'
+            'ServiceAppointment'
         );
 
         //Sjekker at listen har 1 entry.
