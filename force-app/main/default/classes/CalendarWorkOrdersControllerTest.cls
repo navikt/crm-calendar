@@ -26,9 +26,10 @@ private class CalendarWorkOrdersControllerTest {
     static void workOrdersListNotEmpty() {
         //Henter data fra test-databasen og legger den i en WorkOrder-liste
         List<ServiceAppointment> allWorkOrders = CalendarWorkOrdersController.getObjects(
-            'ServiceAppointment',
+            'subject',
             'EarliestStartTime',
-            'DueDate'
+            'DueDate',
+            'ServiceAppontment'
         );
 
         //Sjekker at listen har 1 entry.
@@ -39,7 +40,12 @@ private class CalendarWorkOrdersControllerTest {
     @isTest
     static void workOrderListSubjectMatches() {
         //Henter data fra test-databasen og legger den i en WorkOrder-liste
-        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getObjects('WorkOrder', 'StartDate', 'EndDate');
+        List<WorkOrder> allWorkOrders = CalendarWorkOrdersController.getObjects(
+            'subject',
+            'StartDate',
+            'EndDate',
+            'WorkOrder'
+        );
 
         //Sjekker at første entry sitt subject er 'Arbeidsordre 1'
         System.assertEquals('Arbeidsordre 1', allWorkOrders[0].subject);

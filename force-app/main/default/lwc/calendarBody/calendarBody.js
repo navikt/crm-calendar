@@ -10,7 +10,13 @@ export default class CalendarBody extends LightningElement {
     eventsForMonth = [];
 
     @track serviceAppointments;
-    @wire(getObjects, { record: 'ServiceAppointment', start: 'EarliestStartTime', endTime: 'DueDate' })
+    //@wire(getObjects, { record: 'ServiceAppointment', start: 'EarliestStartTime', endTime: 'DueDate' })
+    @wire(getObjects, {
+        subject: 'subject',
+        startDate: 'EarliestStartTime',
+        endDate: 'DueDate',
+        record: 'ServiceAppointment'
+    })
     wiredGetAllServiceAppointments(result) {
         if (result.data) {
             this.serviceAppointments = result.data;
