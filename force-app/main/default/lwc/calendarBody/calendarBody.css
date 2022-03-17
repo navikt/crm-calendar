@@ -108,12 +108,8 @@ h1 {
     }
     .calendar-container {
         max-width: 100%;
-       
     }
     .day {
         font-size: 9px;
-        white-space:nowrap;
-        overflow:hidden;
-        text-overflow:ellipsis;
     }
 }
