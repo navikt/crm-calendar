@@ -28,23 +28,6 @@ export default class CalendarBody extends LightningElement {
         }
     }
 
-    /*     @wire(getObjects, {
-        subject: 'subject',
-        startDate: 'EarliestStartTime',
-        endDate: 'DueDate',
-        record: 'ServiceAppointment'
-    })
-    wiredGetObjects(result) {
-        if (result.data) {
-            this.records = result.data;
-            /*  records.forEach((element) => {
-                this.element.startTimeField = element.EarliestStartTime;
-            }); 
-
-            this.load();
-        }
-    } */
-
     handlePrev() {
         this.monthNav--;
         this.load();
@@ -107,9 +90,6 @@ export default class CalendarBody extends LightningElement {
 
         if (this.records) {
             this.records.forEach((r) => {
-                //ønskelig å endre fra earlieststarttime (som er serviceappointment-spesifikk, til en generell startDate som
-                //kan fungere for alle typer. 2 linjer bør endres.)
-                // const serviceAppointmentDate = new Date(r[this.startTimeField]);
                 const serviceAppointmentDate = new Date(r[this.startTimeField]);
                 if (serviceAppointmentDate.getMonth() == month) {
                     this.eventsForMonth.push(r);
