@@ -1,20 +1,21 @@
 <template>
     <main class="slds-grid main-container">
         <div class="nav-container slds-align_absolute-center">
-        <lightning-button
-            label="<"
-            title="Non-primary action"
-            onclick={handlePrev}
-            class="slds-x-small nav-button"
-        ></lightning-button>
-        <h1 class="slds-grid month-title">{currentMonth}</h1>
-        <lightning-button
-            label=">"
-            title="Non-primary action"
-            onclick={handleNext}
-            class="slds-x-small nav-button"
-        ></lightning-button>
-    </div>
+            <lightning-button
+                label="<"
+                title="Non-primary action"
+                onclick={handlePrev}
+                class="slds-x-small nav-button"
+            ></lightning-button>
+            <h1 class="slds-grid month-title">{currentMonth}</h1>
+
+            <lightning-button
+                label=">"
+                title="Non-primary action"
+                onclick={handleNext}
+                class="slds-x-small nav-button"
+            ></lightning-button>
+        </div>
     </main>
     <div class="slds-grid slds-wrap calendar-container">
         <div class="slds-col slds-size_1-of-7 day-header">
@@ -40,7 +41,7 @@
         </div>
         <template for:each={monthDays} for:item="monthDay">
             <div class="slds-col slds-size_1-of-7 day" key={monthDay.date}>
-               <p class="date">{monthDay.day}</p>
+                <p class="date">{monthDay.day}</p>
                 <template for:each={monthDay.events} for:item="event">
                     <div class="events" key={event.Id}>{event.Subject}</div>
                 </template>

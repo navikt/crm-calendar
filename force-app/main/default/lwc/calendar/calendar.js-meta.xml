@@ -9,10 +9,17 @@
         <target>lightning__Tab</target>
     </targets>
     <targetConfigs>
-        <targetConfig targets="lightning__RecordPage">
-            <objects>
+        <!--         <targetConfig targets="lightning__RecordPage">
+ -->
+        <targetConfig targets="lightning__RecordPage,lightning__HomePage">
+            <property name="subjectName" type="String" label="Subject Name" default="subject" />
+            <property name="startTimeField" type="String" label="Start Date" default="EarliestStartTime" />
+            <property name="endTimeField" type="String" label="End Date" default="DueDate" />
+            <property name="recordName" type="String" label="Record" default="ServiceAppointment" />
+
+            <!--   <objects>
                 <object>WorkOrder</object>
-            </objects>
+            </objects> -->
         </targetConfig>
     </targetConfigs>
 

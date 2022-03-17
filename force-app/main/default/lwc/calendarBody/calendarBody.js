@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
 import getObjects from '@salesforce/apex/CalendarWorkOrdersController.getObjects';
 
 export default class CalendarBody extends LightningElement {
@@ -9,12 +9,17 @@ export default class CalendarBody extends LightningElement {
     monthDays = [];
     eventsForMonth = [];
 
+    @api subjectName;
+    @api startTimeField;
+    @api endTimeField;
+    @api recordName;
+
     @track records;
     @wire(getObjects, {
-        subject: 'subject',
-        startDate: 'EarliestStartTime',
-        endDate: 'DueDate',
-        record: 'ServiceAppointment'
+        subject: '$subjectName',
+        startDate: '$startTimeField',
+        endDate: '$endTimeField',
+        record: '$recordName'
     })
     wiredGetObjects(result) {
         if (result.data) {
@@ -85,9 +90,7 @@ export default class CalendarBody extends LightningElement {
 
         if (this.records) {
             this.records.forEach((r) => {
-                //ønskelig å endre fra earlieststarttime (som er serviceappointment-spesifikk, til en generell startDate som
-                //kan fungere for alle typer. 2 linjer bør endres.)
-                const serviceAppointmentDate = new Date(r.EarliestStartTime);
+                const serviceAppointmentDate = new Date(r[this.startTimeField]);
                 if (serviceAppointmentDate.getMonth() == month) {
                     this.eventsForMonth.push(r);
                 }
@@ -99,7 +102,7 @@ export default class CalendarBody extends LightningElement {
             const dateOfTheDay = new Date(year, month, i - paddingDaysFirst);
             if (i > paddingDaysFirst && i <= daysInMonth + paddingDaysFirst) {
                 this.eventsForMonth.forEach((event) => {
-                    if (dateOfTheDay.getDate() == new Date(event.EarliestStartTime).getDate()) {
+                    if (dateOfTheDay.getDate() == new Date(event[this.startTimeField]).getDate()) {
                         eventsForDay.push(event);
                     }
                 });
