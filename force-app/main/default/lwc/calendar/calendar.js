@@ -16,4 +16,9 @@ export default class Calendar extends LightningElement {
             this.userId = data.id;
         }
     }
+
+    @api subjectName = 'subject';
+    @api startTimeField = 'EarliestStartTime';
+    @api endTimeField = 'DueDate';
+    @api recordName = 'ServiceAppointment';
 }

@@ -1,12 +1,11 @@
 <template>
-    <div style="background-color: white">
-        User name: {userName}
-        <br />
-        User ID: {userId}
-        <br />
+    <div style="background-color: white"></div>
 
-        <c-calendar-workorders></c-calendar-workorders>
-    </div>
-
-    <c-calendar-body> </c-calendar-body>
+    <c-calendar-body
+        subject-name={subjectName}
+        start-time-field={startTimeField}
+        end-time-field={endTimeField}
+        record-name={recordName}
+    >
+    </c-calendar-body>
 </template>

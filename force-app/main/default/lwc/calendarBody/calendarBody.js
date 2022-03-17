@@ -1,27 +1,46 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire, api } from 'lwc';
+import getObjects from '@salesforce/apex/CalendarWorkOrdersController.getObjects';
 
 export default class CalendarBody extends LightningElement {
     weekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
     reversedWeekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'].reverse();
-    calendarContainer = document.getElementsByClassName('calendar-container');
     monthNav = 0;
-    currentMonth = 'Test';
+    currentMonth = '';
+    monthDays = [];
+    eventsForMonth = [];
+
+    @api subjectName;
+    @api startTimeField;
+    @api endTimeField;
+    @api recordName;
+
+    @track records;
+    @wire(getObjects, {
+        subject: '$subjectName',
+        startDate: '$startTimeField',
+        endDate: '$endTimeField',
+        record: '$recordName'
+    })
+    wiredGetObjects(result) {
+        if (result.data) {
+            this.records = result.data;
+            this.load();
+        }
+    }
 
     handlePrev() {
         this.monthNav--;
-        this.load(this.template.querySelector('div'));
+        this.load();
     }
     handleNext() {
         this.monthNav++;
-        this.load(this.template.querySelector('div'));
+        this.load();
     }
 
-    renderedCallback() {
-        this.load(this.template.querySelector('div'));
-    }
-
-    load(element) {
+    load() {
         const dt = new Date();
+        this.eventsForMonth = [];
+        this.monthDays = [];
 
         if (this.monthNav !== 0) {
             dt.setMonth(new Date().getMonth() + this.monthNav);
@@ -33,7 +52,6 @@ export default class CalendarBody extends LightningElement {
 
         const firstDayOfMonth = new Date(year, month, 1);
         const lastDayOfMonth = new Date(year, month + 1, 0);
-
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
         const firstDateString = firstDayOfMonth.toLocaleDateString('no', {
@@ -42,7 +60,6 @@ export default class CalendarBody extends LightningElement {
             month: 'numeric',
             day: 'numeric'
         });
-        //  console.log(firstDateString);
 
         const lastDateString = lastDayOfMonth.toLocaleDateString('no', {
             weekday: 'long',
@@ -71,53 +88,32 @@ export default class CalendarBody extends LightningElement {
 
         this.currentMonth = `${dt.toLocaleDateString('no', { month: 'long' })} ${year}`;
 
-        element.innerHTML = `
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Man </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Tir </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Ons </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Tor </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Fre </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Lør </span>
-        </div>
-        <div class="slds-col slds-size_1-of-7 day-header">
-            <span> Søn </span>
-        </div>`;
+        if (this.records) {
+            this.records.forEach((r) => {
+                const serviceAppointmentDate = new Date(r[this.startTimeField]);
+                if (serviceAppointmentDate.getMonth() == month) {
+                    this.eventsForMonth.push(r);
+                }
+            });
+        }
 
-        const test = 1;
-        for (let i = 1; i <= paddingDaysFirst + daysInMonth + paddingDaysLast; i++) {
-            const daySquare = document.createElement('div');
-            daySquare.classList.add('day');
-            daySquare.classList.add('slds-col');
-            daySquare.classList.add('slds-size_1-of-7');
-            daySquare.style.float = 'right';
-            daySquare.style.border = '0.5px solid rgb(154, 154, 154)';
-            daySquare.style.height = '150px';
-            daySquare.style.paddingLeft = '6px';
-            daySquare.style.paddingTop = '3px';
-            daySquare.style.fontWeight = '500';
-
-            if (i > paddingDaysFirst && i <= daysInMonth + 1) {
-                daySquare.innerText = i - paddingDaysFirst;
+        for (let i = 1; i <= paddingDaysFirst + daysInMonth; i++) {
+            let eventsForDay = [];
+            const dateOfTheDay = new Date(year, month, i - paddingDaysFirst);
+            if (i > paddingDaysFirst && i <= daysInMonth + paddingDaysFirst) {
+                this.eventsForMonth.forEach((event) => {
+                    if (dateOfTheDay.getDate() == new Date(event[this.startTimeField]).getDate()) {
+                        eventsForDay.push(event);
+                    }
+                });
+                this.monthDays.push({
+                    day: i - paddingDaysFirst,
+                    date: dateOfTheDay,
+                    events: eventsForDay
+                });
             } else if (i <= paddingDaysFirst) {
-                daySquare.innerText = prevPaddingDays[i - 1];
-                daySquare.style.opacity = '0.5';
-            } else if (i > daysInMonth) {
-                // console.log(nextPaddingDays[i]);
-                daySquare.innerText = nextPaddingDays[i - 1];
+                this.monthDays.push({});
             }
-
-            element.appendChild(daySquare);
         }
     }
 }

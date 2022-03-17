@@ -1,9 +1,17 @@
-.calendar-container {
-    background-color: #fff;
+* {
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .main-container {
     background-color: white;
+    max-width: 75%;
+    max-height: 100%;
+    text-align: center;
+}
+
+.calendar-container {
+    background-color: #fff;
+    max-width: 75%;
 }
 
 .day-header {
@@ -11,27 +19,97 @@
     text-align: center;
 }
 
+.day {
+    border: 0.5px solid rgb(154, 154, 154);
+    height: 96px;
+    padding-top: 3px;
+    padding-right: 6px;
+    font-weight: 500;
+    text-align: left;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-left: -0.5px;
+    margin-top: -0.5px;
+}
+
+.date {
+    padding-left: 6px;
+}   
+
 .month-title {
     text-transform: capitalize;
-    text-align: center;
     font-weight: 550;
     font-size: 20px;
-    color: #244B6D;
+    color: #244b6d;
 }
 
 .month-title-1 {
     text-transform: capitalize;
-    text-align: center;
     font-weight: 550;
     font-size: 20px;
-    color: #244B6D;
-}
+    color: #244b6d;
+} 
 
 .nav-button {
-    float: right;
+    padding: 5px;
+}
+
+.events {
+    color: #254B6D;
+    border : 1px solid #254B6D;
+    padding: 1px;
+    padding-left: 5px;
+    border-radius: 3px;
+    overflow: hidden;
 }
 
 h1 {
     display: inline;
     width: 170px;
+}
+
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+     .main-container {
+        max-width: 100%;
+    }
+    
+    .calendar-container {
+       max-width: 100%;
+    }
+    .day {
+        font-size: 15px;
+    }
+
+}
+
+@media only screen and (max-width: 600px){
+	/*Big smartphones [426px -> 600px]*/
+    .main-container {
+        max-width: 100%;
+    }
+    
+    .calendar-container {
+        max-width: 100%;
+    }
+    .day {
+        font-size: 10px;
+    }
+
+}
+
+@media only screen and (max-width: 425px){
+	/*Small smartphones [325px -> 425px]*/
+    .main-container {
+        max-width: 100%;
+        
+    }
+    .calendar-container {
+        max-width: 100%;
+    }
+    .day {
+        font-size: 9px;
+    }
 }
