@@ -19,7 +19,7 @@
     padding-left: 5px;
     margin-top: 15px;
     margin-bottom : 15px;
-    color: rgb(60,64,67);
+    color: rgb(60,64,67)∏;
 }
 
 .inner {
@@ -44,6 +44,8 @@
 
 .date {
     padding-left: 6px;
+    border-radius: -50%;
+    color: aqua;
 }   
 
 .month-title {
