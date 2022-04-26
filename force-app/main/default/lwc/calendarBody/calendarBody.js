@@ -37,6 +37,13 @@ export default class CalendarBody extends LightningElement {
         this.load();
     }
 
+    getEventInfo(event){
+        var id = event.target.dataset.id;
+        var subject = event.target.dataset.subject;
+        console.log(id);
+        console.log(subject);
+    }
+
     load() {
         const dt = new Date();
         this.eventsForMonth = [];
