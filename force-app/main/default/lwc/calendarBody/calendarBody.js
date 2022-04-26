@@ -3,7 +3,6 @@ import getObjects from '@salesforce/apex/CalendarWorkOrdersController.getObjects
 
 export default class CalendarBody extends LightningElement {
     weekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'];
-    reversedWeekdays = ['mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag', 'søndag'].reverse();
     monthNav = 0;
     currentMonth = '';
     monthDays = [];
@@ -76,7 +75,6 @@ export default class CalendarBody extends LightningElement {
         });
 
         const paddingDaysFirst = this.weekdays.indexOf(firstDateString.split(' ')[0]);
-        const paddingDaysLast = this.reversedWeekdays.indexOf(lastDateString.split(' ')[0]);
 
         let prevPaddingDays = [];
         for (let j = 1; j <= paddingDaysFirst; j++) {
@@ -85,13 +83,6 @@ export default class CalendarBody extends LightningElement {
             prevPaddingDays.push(d.getDate());
         }
         prevPaddingDays.reverse();
-
-        let nextPaddingDays = [];
-        for (let j = 1; j <= paddingDaysLast; j++) {
-            let d = lastDayOfMonth;
-            d.setDate(d.getDate() + 1);
-            nextPaddingDays.push(d.getDate());
-        }
 
         this.currentMonth = `${dt.toLocaleDateString('no', { month: 'long' })} ${year}`;
 
